@@ -51,7 +51,7 @@ export default {
 
   created() {
     FectherEntity(System)()
-      .find(this.fetchData('lsystem'))
+      .find(this.fetchData('lsystem'), {limit: 500})
   }
 }
 
