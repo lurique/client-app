@@ -6,7 +6,7 @@ import applications from './applications/router'
 import system from './system/router'
 import clients from './clients/router'
 import datacenter from './datacenter/router'
-import providers from './providers/router'
+import connections from './connections/router'
 import settings from './settings/router'
 import loadbalances from './loadbalances/router'
 import databases from './databases/router'
@@ -28,6 +28,11 @@ import cicd from './ci-cd/router'
 import auth from './auth/router'
 import nas from './nas/router'
 import repository from './repository/router'
+import images from './images/router'
+import network from './network/router'
+import volumes from './volumes/router'
+import snapshot from './snapshot/router'
+import flavors from './flavors/router'
 
 export default {
   name: 'inventory',
@@ -41,7 +46,7 @@ export default {
     datacenter,
     clients,
     settings,
-    providers,
+    connections,
     loadbalances,
     databases,
     brokers,
@@ -60,6 +65,11 @@ export default {
     cicd,
     auth,
     repository,
-    nas
+    nas,
+    images,
+    network,
+    volumes,
+    snapshot,
+    flavors
   ]
 }
