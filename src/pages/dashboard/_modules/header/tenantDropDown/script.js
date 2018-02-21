@@ -8,12 +8,14 @@ import Me from 'factories/me'
 import store from 'src/store'
 import tenantMananger from 'services/tenantManager'
 
+import { EventBus } from 'src/resources/bus/bus-general.js';
+
 export default {
   data: function () {
     return {
       menu: {
         teams: ['Teams', 'fa-users'],
-        providers: ['Providers', 'fa-wrench'],
+        connections: ['Connections', 'fa-wrench'],
         events: ['Events', 'fa-bell'],
         hr: true,
         access_manager: ['Access Manager', 'fa-key'],
@@ -24,7 +26,8 @@ export default {
       teams: {},
       tenant: {name: null, _id: null},
       avatar: IMG_AVATAR_DEFAULT,
-      users: {}
+      users: {},
+      vBarOptions: {preventParentScroll: true, resizeRefresh: false, scrollThrottle: 30}
     }
   },
 
@@ -121,5 +124,11 @@ export default {
 
     const tn = this.storageTeam || this.users
     this.updateViewTenant(tn)
+
+    EventBus.$on('update-teams', this.fetchData);
+  },
+
+  destroyed() {
+    EventBus.$off('update-teams', this.fetchData)
   }
 }

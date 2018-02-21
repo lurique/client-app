@@ -1,5 +1,5 @@
 <div>
-  <v-server-table
+  <bs-table-server
     name="dc-servers-list"
     :url="urlServers"
     :columns="columns"
@@ -7,14 +7,14 @@
     ref="vTable"
   >
 
-    <template slot="hostname" scope="props">
-      <router-link :to="{name: 'servers.single', params: { id: props.row._id }}">{{props.row.hostname}}</router-link>
+    <template slot="hostname" slot-scope="props">
+      <a href="#" @click.prevent.stop="linkSingle(props.row._id)">{{props.row.hostname}}</a>
     </template>
-    <template slot="actions" scope="props">
+    <template slot="actions" slot-scope="props">
       <div>
-        <router-link :to="{name: 'servers.single', params: { id: props.row._id }}"
-                     class="fa fa-eye btn btn-primary btn-xs"></router-link>
+        <a @click.stop="linkSingle(props.row._id)"
+                     class="fa fa-eye btn btn-primary btn-xs"></a>
       </div>
     </template>
-  </v-server-table>
+  </bs-table-server>
 </div>

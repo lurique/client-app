@@ -4,12 +4,12 @@
   </div>
 
   <div class="col-xs-4">
-    <h4>Status</h4>
-    <button class="btn btn-success" :disabled="status == 'enabled'" @click="enable('enabled')">
+    <h4>Status ({{status}})</h4>
+    <button class="btn btn-success" v-if="status !== 'enabled'" @click="enable('enabled')">
       <i class="fa fa-toggle-on"></i>
       Enabled
     </button>
-    <button class="btn btn-danger" :disabled="status == 'disabled'" @click="enable('disabled')">
+    <button class="btn btn-danger" v-if="status !== 'disabled'" @click="enable('disabled')">
       <i class="fa fa-toggle-off"></i>
       Disabled
     </button>
@@ -39,7 +39,7 @@
   <div class="col-xs-8">
     <h3><i class="fa fa-key" aria-hidden="true"></i> Tasks and Permissions</h3>
 
-    <ul class="list-group">
+    <bs-list>
       <li class="list-group-item" v-for="item, key in permissions">
 
         <div class="row">
@@ -76,7 +76,7 @@
           <bs-label type="default">{{req.command}} {{req.access}}</bs-label>&nbsp;
         </template>
       </li>
-    </ul>
+    </bs-list>
   </div>
 
 </div>

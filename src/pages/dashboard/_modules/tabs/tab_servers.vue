@@ -17,6 +17,7 @@
                    :template="template"
                    :on-hit="onHit"
                    class="col-xs-12"
+                   :headers="headers"
         ></typeahead>
       </div>
 
@@ -28,6 +29,7 @@
                    :template="template"
                    :on-hit="onHit"
                    class="col-xs-12"
+                   :headers="headers"
         ></typeahead>
       </div>
 
@@ -36,7 +38,7 @@
       </div>
     </template>
 
-    <template slot="view" scope="props">
+    <template slot="view" slot-scope="props">
       <b class="text-capitalize">{{props.item.hostname}}</b> <span v-if='props.item.os'>({{props.item.os.base}})</span><span v-if='props.item.datacenters'> - {{props.item.datacenters.name}}</span><br/>
       <span class='ft15'>
           <bs-label type='default'>{{props.item.ipv4_private}}</bs-label>
@@ -61,6 +63,7 @@
 
   import TabCreaterList from 'mixins/tab-creater-list'
   import Servers from 'factories/servers'
+  import headerLogin from 'src/resources/libs/headerAuthorization'
 
   export default {
     mixins: [TabCreaterList],
@@ -72,6 +75,7 @@
 
     data: function () {
       return {
+        headers: headerLogin,
         filter: true,
         URL: `${new Servers().getUrl()}?query=`,
         template: "<b>{{item.hostname}}</b> <span v-if='item.os'>({{item.os.base}})</span> - <span v-if='item.datacenters'>{{item.datacenters.name}}</span><br/> " +

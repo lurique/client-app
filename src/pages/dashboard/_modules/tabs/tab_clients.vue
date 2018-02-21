@@ -16,10 +16,11 @@
                  form-type="horizontal"
                  :on-hit="onHit"
                  class="mt10"
+                 :headers="headers"
       ></typeahead>
     </template>
 
-    <template slot="view" scope="props">
+    <template slot="view" slot-scope="props">
       <b class="text-capitalize">{{props.item.name}}</b>
     </template>
 
@@ -32,12 +33,14 @@
 
   import TabCreaterList from 'mixins/tab-creater-list'
   import Clients from 'factories/clients'
+  import headerLogin from 'src/resources/libs/headerAuthorization'
 
   export default {
     mixins: [TabCreaterList],
 
     data: function () {
       return {
+        headers: headerLogin,
         URL: `${new Clients().getUrl()}?query=`,
         template: "<b>{{item.name}}</b>",
         filter: ['_id', 'name']

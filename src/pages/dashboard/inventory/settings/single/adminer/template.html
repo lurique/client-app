@@ -1,5 +1,5 @@
 <div>
-  <v-server-table
+  <bs-table-server
     name="adminer-list"
     :url="url"
     :columns="columns"
@@ -7,10 +7,10 @@
     ref="vTable"
   >
 
-    <template slot="actions" scope="props">
+    <template slot="actions" slot-scope="props">
       <div>
         <a class="fa fa-edit btn btn-warning btn-xs" @click.stop="optP(props.row)"></a>
       </div>
     </template>
-  </v-server-table>
+  </bs-table-server>
 </div>

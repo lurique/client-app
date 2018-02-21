@@ -9,7 +9,7 @@ export default {
   data: function () {
     return {
       entity: new Reports(),
-      columns: ['name', 'updated_at', 'created_at', 'actions'],
+      columns: ['name', 'report', 'created_at', 'status', 'actions'],
       options: {
         filterable: ['name'],
         headings: {

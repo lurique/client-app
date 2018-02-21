@@ -1,11 +1,10 @@
 <template>
   <div id="app" class="bg-purple">
+    <bootue></bootue>
     <router-view></router-view>
 
     <callback></callback>
     <loader></loader>
-
-    <notifications group="foo" />
   </div>
 </template>
 

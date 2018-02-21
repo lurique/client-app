@@ -1,50 +1,52 @@
 'use strict'
 
-import Modals from 'mixins/modals'
-import Reports from 'factories/reports'
 import FectherEntity from 'services/fetchEntity'
+import Modals from 'mixins/modals'
+import tabGeneral from './tabs/tab_general'
+import tabPivot from './tabs/tab_pivot'
+import Reports from 'factories/reports'
 
-import tabTags from './tab_tags'
+import _ from 'lodash'
 
 export default {
   mixins: [Modals],
 
   components: {
-    tabTags,
+    tabGeneral,
+    tabPivot
   },
 
-  data () {
+  data: function() {
     return {
-      data: {
-        name: null, description: null,
-        tags: []
-      },
-      options: {}
+      tabShow: 0
     }
   },
 
   computed: {
-    tab_tags() {return this.$refs.tab_tags}
+    tab_general() {return this.$refs.tab_general},
+    tab_pivot() {return this.$refs.tab_pivot}
   },
 
   methods: {
     afterShow () {
       this.text.title =  this.create ? 'Create new Report' : `Edit ${this.model.name} reports`
-    },
-
-    createLoad () {
-      this.tabShow=0
-      this.data = {}
-      this.tab_tags.reset()
-    },
-
-    editLoad () {
-      this.$set(this, 'data', this.model)
-      this.tab_tags.updaterEdit(this.model.tags)
+      this.changeTab(this.tabShow)
     },
 
     setupModel () {
-      this.model = _.pickBy(this.data, _.identity)
+      this.model.name = `${_.get(this, 'model.report', '-')} ${_.get(this, 'model.component', '-')} ${new Date().toLocaleString("en-US")}`
+      this.model.status = 'process'
+    },
+
+    changeTab(tab) {
+      switch(tab) {
+        case 0:
+          this.tab_general.updateEvent()
+        break;
+        case 1:
+          this.tab_pivot.updateEvent()
+        break;
+      }
     },
 
     createSave () {
@@ -52,14 +54,6 @@ export default {
 
       FectherEntity(Reports)()
         .create(this.finishJob, this.model)
-    },
-
-    editSave () {
-      this.setupModel()
-
-      FectherEntity(Reports)()
-        .update(this.finishJob, this.model)
     }
   }
-
 }

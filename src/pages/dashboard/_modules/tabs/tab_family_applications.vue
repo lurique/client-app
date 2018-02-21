@@ -21,11 +21,12 @@
                    :template="template_apps"
                    :on-hit="onHit"
                    class="col-xs-12"
+                   :headers="headers"
         ></typeahead>
       </div>
     </template>
 
-    <template slot="view" scope="props">
+    <template slot="view" slot-scope="props">
       <b class="text-capitalize">{{props.item.name}}</b> <span v-if='props.item.environment'>({{props.item.environment}})</span>
       <span class='ft15 inline'>
             <bs-label type='default' v-if='props.item.role'>{{props.item.role.role}}</bs-label>
@@ -42,6 +43,7 @@
 
   import Applications from 'factories/applications'
   import Adminer from 'factories/adminer'
+  import headerLogin from 'src/resources/libs/headerAuthorization'
   import FectherEntity from 'services/fetchEntity'
 
   import Modals from 'mixins/modals'
@@ -52,6 +54,7 @@
 
     data() {
       return {
+        headers: headerLogin,
         URL: `${new Applications().getUrl()}?query=`,
         label: Applications.name,
         options: {

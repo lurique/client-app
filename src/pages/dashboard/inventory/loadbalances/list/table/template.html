@@ -1,5 +1,5 @@
 <div>
-  <v-server-table
+  <bs-table-server
     name="lb-list"
     :url="url"
     :columns="columns"
@@ -7,23 +7,23 @@
     ref="vTable"
   >
 
-    <template slot="name" scope="props">
+    <template slot="name" slot-scope="props">
       <button class="btn btn-default btn-xs fa fa-copy" v-clipboard="props.row.name"></button>
-      <router-link :to="{name: 'loadbalances.single', params: { id: props.row._id }}">{{props.row.name}}</router-link>
+      <router-link :to="{name: 'loadbalance.single', params: { id: props.row._id }}">{{props.row.name}}</router-link>
     </template>
-    <template slot="qtdserver" scope="props">
+    <template slot="qtdserver" slot-scope="props">
       <bs-label>{{props.row.qtdserver}}</bs-label>
     </template>
-    <template slot="qtdtargets" scope="props">
+    <template slot="qtdtargets" slot-scope="props">
       <bs-label>{{props.row.qtdtargets}}</bs-label>
     </template>
-    <template slot="actions" scope="props">
+    <template slot="actions" slot-scope="props">
       <div class="min-table">
-        <router-link :to="{name: 'loadbalances.single', params: { id: props.row._id }}"
+        <router-link :to="{name: 'loadbalance.single', params: { id: props.row._id }}"
                      class="fa fa-eye btn btn-primary btn-xs"></router-link>
         <a class="fa fa-edit btn btn-warning btn-xs" @click.stop="editP(props.row)"></a>
         <a class="fa fa-trash btn btn-danger btn-xs" @click.stop="deleteP(props.row)"></a>
       </div>
     </template>
-  </v-server-table>
+  </bs-table-server>
 </div>
